@@ -16,17 +16,17 @@ public class TimeTrigger : MonoBehaviour
     private const float audioStartTime = 4f;
     private bool _startedAudio = false;
 
-    private void GetDisplayText(StringBuilder sb)
+    public string GetDisplayText()
     {
-        if (KeybindChaosPlugin.Instance.KeybindMode.Value != Mode.Timer) return;
+        if (KeybindChaosPlugin.Instance.KeybindMode.Value != Mode.Timer) return string.Empty;
 
         if (_time < 10f)
         {
-            sb.AppendFormat("Keybind Reset: {0:0.00}\n", _time);
+            return string.Format("Keybind Reset: {0:0.00}\n", _time);
         }
         else
         {
-            sb.AppendFormat("Keybind Reset: {0:0}s\n", Mathf.Floor(_time));
+            return string.Format("Keybind Reset: {0:0}s\n", Mathf.Floor(_time));
         }
     }
 
@@ -70,6 +70,7 @@ public class TimeTrigger : MonoBehaviour
         if (KeybindChaosPlugin.Instance.KeybindMode.Value != Mode.Timer) return;
 
         _time -= Time.deltaTime;
+
         if (_time < 0f)
         {
             _time += KeybindChaosPlugin.Instance.ResetTime.Value;
