@@ -14,7 +14,7 @@ public partial class KeybindChaosPlugin : BaseUnityPlugin
     public static KeybindChaosPlugin Instance { get; private set; }
 
     // Config
-    public ConfigEntry<Mode> KeybindMode;
+    public ConfigEntry<ShuffleMode> KeybindMode;
     public ConfigEntry<bool> ShowKeybindDisplay;
     public ConfigEntry<int> ResetTime;
     public ConfigEntry<bool> PlayTimerAudio;
@@ -26,7 +26,7 @@ public partial class KeybindChaosPlugin : BaseUnityPlugin
 
         KeybindPermuter.EnsureHooked();
 
-        KeybindMode = Config.Bind("General", nameof(KeybindMode), Mode.Timer, "Choose what causes the keybinds to get shuffled.");
+        KeybindMode = Config.Bind("General", nameof(KeybindMode), ShuffleMode.Timer, "Choose what causes the keybinds to get shuffled.");
 
         ShowKeybindDisplay = Config.Bind("General", nameof(ShowKeybindDisplay), true, "Show a display with the current binds.");
 
@@ -37,9 +37,6 @@ public partial class KeybindChaosPlugin : BaseUnityPlugin
             .ToDictionary(name => name, name => Config.Bind("General.Binds", name, true, $"Include {name}"));
 
         Md.HeroController.Start.Postfix(AddTimerComponent);
-
-        // Log binds on shuffle because the display doesn't exist yet
-        KeybindPermuter.OnRandomize += LogBinds;
 
         Logger.LogInfo($"Plugin {Name} ({Id}) has loaded!");
     }

@@ -22,7 +22,7 @@ public class TimeTrigger : MonoBehaviour
 
     public string GetDisplayText()
     {
-        if (KeybindChaosPlugin.Instance.KeybindMode.Value != Mode.Timer) return string.Empty;
+        if (KeybindChaosPlugin.Instance.KeybindMode.Value != ShuffleMode.Timer) return string.Empty;
 
         if (_time < 10f)
         {
@@ -63,7 +63,7 @@ public class TimeTrigger : MonoBehaviour
 
     void Update()
     {
-        if (KeybindChaosPlugin.Instance.KeybindMode.Value != Mode.Timer) return;
+        if (KeybindChaosPlugin.Instance.KeybindMode.Value != ShuffleMode.Timer) return;
 
         _time -= Time.deltaTime;
 

@@ -1,6 +1,6 @@
 ﻿namespace KeybindChaos;
 
-public enum Mode
+public enum ShuffleMode
 {
     None,
     Timer,
