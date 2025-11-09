@@ -1,4 +1,6 @@
 ﻿using BepInEx.Configuration;
+using Silksong.UnityHelper.Extensions;
+using Silksong.UnityHelper.Util;
 using System;
 using System.IO;
 using System.Reflection;
@@ -16,6 +18,8 @@ public class TimeTrigger : MonoBehaviour
     private const float audioStartTime = 4f;
     private bool _startedAudio = false;
 
+    private Display _display;
+
     public string GetDisplayText()
     {
         if (KeybindChaosPlugin.Instance.KeybindMode.Value != Mode.Timer) return string.Empty;
@@ -30,26 +34,18 @@ public class TimeTrigger : MonoBehaviour
         }
     }
 
-    void Awake()
+    private void Awake()
     {
         _as = gameObject.GetComponent<AudioSource>();
         _clip = LoadTimerAudio();
     }
 
-    private AudioClip LoadTimerAudio()
-    {
-        Assembly a = typeof(TimeTrigger).Assembly;
-        using (Stream resFilestream = a.GetManifestResourceStream("KeybindChaos.Resources.countdown.wav"))
-        {
-            using MemoryStream ms = new();
-            resFilestream.CopyTo(ms);
-            byte[] ba = ms.ToArray();
-            return Satchel.WavUtils.ToAudioClip(ba);
-        }
-    }
+    private AudioClip LoadTimerAudio() => WavUtil.AudioClipFromEmbeddedResource("KeybindChaos.Resources.countdown.wav", typeof(TimeTrigger).Assembly);
 
     void Start()
     {
+        _display = gameObject.GetOrAddComponent<Display>();
+
         _time = KeybindChaosPlugin.Instance.ResetTime.Value;
         KeybindChaosPlugin.Instance.Config.SettingChanged += OnSettingsChanged;
     }
@@ -85,5 +81,7 @@ public class TimeTrigger : MonoBehaviour
                 _as.PlayOneShot(_clip);
             }
         }
+
+        _display.UpdateText(GetDisplayText());
     }
 }

@@ -28,7 +28,7 @@ public partial class KeybindChaosPlugin : BaseUnityPlugin
 
         KeybindMode = Config.Bind("General", nameof(KeybindMode), Mode.Timer, "Choose what causes the keybinds to get shuffled.");
 
-        ShowKeybindDisplay = Config.Bind("General", nameof(ShowKeybindDisplay), true, "[NOT IMPLEMENTED YET] show a display with the current binds.");
+        ShowKeybindDisplay = Config.Bind("General", nameof(ShowKeybindDisplay), true, "Show a display with the current binds.");
 
         ResetTime = Config.Bind("Mode.Timer", nameof(ResetTime), 30, "The number of seconds before keybinds are shuffled.");
         PlayTimerAudio = Config.Bind("Mode.Timer", nameof(PlayTimerAudio), true, "Play a countdown audio near the end of the timer.");
@@ -71,6 +71,7 @@ public partial class KeybindChaosPlugin : BaseUnityPlugin
 
     private void AddTimerComponent(HeroController self)
     {
+        self.gameObject.AddComponent<Display>();
         self.gameObject.AddComponent<TimeTrigger>();
     }
 }

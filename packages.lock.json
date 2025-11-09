@@ -59,11 +59,33 @@
           "MonoDetour": "0.5.0"
         }
       },
+      "Silksong.CanvasUtil": {
+        "type": "Direct",
+        "requested": "[0.1.1, )",
+        "resolved": "0.1.1",
+        "contentHash": "Q2r67amRCEawLnNQHS602ZHfPlzzjqPTDv3xXoh0xF6gE0CgNbb/kBw52C7JooUAhRiLbEZnCUu9nn4E1LkLPg==",
+        "dependencies": {
+          "BepInEx.Core": "5.4.21",
+          "HarmonyX": "2.9.0",
+          "UnityEngine.Modules": "6000.0.50"
+        }
+      },
       "Silksong.GameLibs": {
         "type": "Direct",
         "requested": "[*-*, )",
-        "resolved": "1.1.0-silksong1.0.28891",
-        "contentHash": "IplYreERpZ2m1zGFdfQYvzfjeJJ5KSTs7aVIdGhN0XjREfx4J3oq+vGmFBiH84ISxxKIggFu9ab2N0AMGl5xCA=="
+        "resolved": "1.1.0-silksong1.0.29242",
+        "contentHash": "Be1zJ8J3KWL2H7sUr+2qmHlwtaZk9mA/0aLzqrmFC140OPRGluEuXnbl7u1ZFTRRdMW9QlQY7MdH8JVyYQjsqw=="
+      },
+      "Silksong.UnityHelper": {
+        "type": "Direct",
+        "requested": "[1.0.0, )",
+        "resolved": "1.0.0",
+        "contentHash": "0Lmy50SC4j7dmmhuN96UnuOJlnCHB7TPm+5S6L3Z/bnRphnVXjhcEcgKzaP855TGbN0CvlpH9xZQEVSnAFn4xw==",
+        "dependencies": {
+          "BepInEx.Core": "5.4.21",
+          "HarmonyX": "2.9.0",
+          "UnityEngine.Modules": "6000.0.50"
+        }
       },
       "UnityEngine.Modules": {
         "type": "Direct",
