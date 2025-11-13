@@ -2,6 +2,7 @@
 using CanvasUtil;
 using GlobalEnums;
 using InControl;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -34,7 +35,7 @@ public class Display : MonoBehaviour
         DontDestroyOnLoad(_canvas);
 
         GameObject topRightText = CanvasUtil.CanvasUtil.CreateTextPanel(
-            _canvas, "abcde", 40, TextAnchor.UpperRight,
+            _canvas, "", 40, TextAnchor.UpperRight,
             new(
                 new(200, 100),
                 new(0, 0),
@@ -50,11 +51,23 @@ public class Display : MonoBehaviour
 
         KeybindPermuter.OnRandomize += SetupKeybindPanel;
         KeybindPermuter.OnRestore += DestroyKeybindPanel;
+        KeybindChaosPlugin.Instance.Config.SettingChanged += SettingChanged;
+    }
+
+    private void SettingChanged(object sender, EventArgs e)
+    {
+        UpdateText("");
+        SetupKeybindPanel();
     }
 
     private void SetupKeybindPanel()
     {
         DestroyKeybindPanel();
+
+        if (KeybindChaosPlugin.Instance.KeybindMode.Value == ShuffleMode.None)
+        {
+            return;
+        }
 
         if (!KeybindChaosPlugin.Instance.ShowKeybindDisplay.Value)
         {
@@ -148,6 +161,7 @@ public class Display : MonoBehaviour
 
         KeybindPermuter.OnRandomize -= SetupKeybindPanel;
         KeybindPermuter.OnRestore -= DestroyKeybindPanel;
+        KeybindChaosPlugin.Instance.Config.SettingChanged -= SettingChanged;
 
     }
 }
