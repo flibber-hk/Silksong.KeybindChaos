@@ -21,7 +21,7 @@
     <PathMap Condition="'$(Configuration)' == 'Release'">$(MSBuildProjectDirectory)=/</PathMap>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageIcon>icon.png</PackageIcon>
-    <RepositoryUrl>https://github.com/flibber-hk/KeybindChaos</RepositoryUrl>
+    <RepositoryUrl>https://github.com/flibber-hk/Silksong.KeybindChaos</RepositoryUrl>
   </PropertyGroup>
   
   <ItemGroup>
